@@ -51,9 +51,9 @@ footer{
 }
 
 main{
-    background-color:blue;
+    background-color:gray;
 
-    width:90%;
+    width:30%;
     min-height:75px;
 
     margin-left:5%;
@@ -75,5 +75,12 @@ form {
 }
 
 table{
+    background-color:gray;
+
+    width:55%;
+    min-height:75px;
+    margin-left:5%;
     border: 1px solid black;
+
+
 }

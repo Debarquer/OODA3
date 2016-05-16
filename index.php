@@ -27,6 +27,9 @@ if(isset($_SESSION['page'])){
         case "register":
             //
             break;
+        case "about":
+            $view->displayGameHouseInfo();
+            break;
         case "gameLibrary":
             $var1 = array("name" => "hello1");
             $var2 = array("name" => "hello2");
