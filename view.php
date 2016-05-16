@@ -45,8 +45,8 @@ class InterfaceView{
                             echo "<input name='password' type='password'></input>";
                             echo "<button type='submit'>Login</button>";
                         echo "</form>";
-                        echo "<form method='GET'><button type='submit' name='page' value='register'>Register</button></form>'";
-                        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can't log in?";
+                        echo "<form method='GET'><button type='submit' name='page' value='register'>Register</button></form>";
+                        echo "<a href=''>Can't log in?</a>";
                     echo "</fieldset>";
                 }
 
@@ -95,13 +95,23 @@ EOT;
 
     //displays the game library as a collection of images
     function displayGameLibrary($data){
+        $dir = "resources/games/";
+
         echo "
             <main>
                 Game Library<br>";
 
-                foreach($data as $key => $value){
-                    echo "Key: " . $key . " " . "Value : " . $value . "<br>";
+                echo "<table>";
+                for($i = 0; $i < sizeof($data); $i++){
+                    //echo "<tr>";
+                        echo "<td><img src='" . $dir . $data[$i]['name'] . "Large.png'</td>";
+                        if(($i+1) % 4 == 0){
+                            //echo "I AM THE FOURTH CELL";
+                            echo "</tr><tr>";
+                        }
+                    //echo "</tr>";
                 }
+                echo "</tr></table>";
 
             echo "</main>";
     }
@@ -149,7 +159,7 @@ EOT;
     function displayStart(){
         echo "
             <main>
-                Game Library
+                Home page
             </main>";
     }
 

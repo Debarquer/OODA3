@@ -67,3 +67,13 @@ main{
     margin-top:-15px;
     margin-left:75%;
 }
+
+form {
+     display:inline;
+     margin:0px;
+     padding:0px;
+}
+
+table{
+    border: 1px solid black;
+}

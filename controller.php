@@ -4,9 +4,9 @@ class Controller{
 
 public function checkInput(){
     if(isset($_GET['page'])){
-        $this->page = $_GET['page'];
+        $_SESSION['page'] = $_GET['page'];
     } else{
-        $this->page = "HOME";
+        $_SESSION['page'] = "HOME";
     }
 
     if(isset($_POST['username']) && isset($_POST['password'])){

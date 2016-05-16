@@ -13,24 +13,35 @@ $controller = new Controller();
 $controller->checkInput();
 
 $view->staticStuff();
-switch("home"){
-    case "home":
-        $view->displayStart();
-        break;
-    case "booking":
-        $view->displayBooking();
-        break;
-    case "calendar":
-        $view->displayCalendar();
-        break;
-    case "register":
-        //
-        break;
-    case "gameLibrary":
-        $view->displayGameLibrary(array("1" => "Hello1", "2" => "Hello2"));
-        break;
-    default:
-        break;
+if(isset($_SESSION['page'])){
+    switch($_SESSION['page']){
+        case "home":
+            $view->displayStart();
+            break;
+        case "booking":
+            $view->displayBooking();
+            break;
+        case "calendar":
+            $view->displayCalendar();
+            break;
+        case "register":
+            //
+            break;
+        case "gameLibrary":
+            $var1 = array("name" => "hello1");
+            $var2 = array("name" => "hello2");
+            $var3 = array("name" => "hello3");
+            $var4 = array("name" => "hello1");
+
+            $arr = array($var1, $var2, $var3, $var4, $var1, $var2, $var3, $var4, $var1, $var2, $var3, $var4);
+            $view->displayGameLibrary($arr);
+            break;
+        default:
+            break;
+    }
+} else{
+    //case HOME
+    $view->displayStart();
 }
 
 ?>
