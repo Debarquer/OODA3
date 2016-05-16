@@ -15,13 +15,16 @@ $controller->checkInput();
 $view->staticStuff();
 switch("home"){
     case "home":
-        $view->display
+        $view->displayStart();
         break;
     case "booking":
+        $view->displayBooking();
         break;
     case "calendar":
+        $view->displayCalendar();
         break;
     case "register":
+        //
         break;
     case "gameLibrary":
         $view->displayGameLibrary(array("1" => "Hello1", "2" => "Hello2"));
