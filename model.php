@@ -2,7 +2,7 @@
 
 class Model{
 
-    public $types = array("games", "accounts", "review");
+    public $types = array("games", "accounts", "review", "Game", "GameLibrary");
 
     //searches for a type using data
     //for a valid type $type
@@ -72,31 +72,39 @@ class Model{
     }
 
     function read($type, $id){
-        if(in_array($types, $type)){
+        if(in_array($type, $this->types)){
 
             //valid type, connecting to database
-            $conn = new mysqli("localhost", "root", "");
-            if($conn->connect_error){
-                die("Connection to database failed at create");
+            $db = new PDO("sqlite:db/db.sqlite");
+
+            try {
+                $db = new PDO("sqlite:db/db.sqlite");
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo "Failed to connect to the database using DSN:<br>$dsn<br>";
+                throw $e;
             }
 
             switch($type){
-                case game:
+                case "Game":
+
+                    $stmt = $db->prepare("SELECT * FROM Game WHERE pk=$id");
+                    $stmt->execute();
+                    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    return $res;
                 break;
-                case accounts:
-                    $sql = "SELECT * FROM accounts WHERE pk='$id'";
-                    $result = mysqli_query($conn, $sql);
-                    $arr = array();
-                    while($row = $result->fetch_assoc()){
-                        $arr[] = $row;
-                    }
+                case "GameLibrary":
+                    $stmt = $db->prepare("SELECT * FROM GameLibrary");
+                    $stmt->execute();
+                    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    $conn->close();
-                    return $arr;
-
+                    return $res;
                 default:
                 break;
             }
+        } else{
+            echo "**Invalid type in read**";
         }
     }
     function update($type, $data){

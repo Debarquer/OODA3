@@ -6,6 +6,17 @@ require_once "model.php";
 require_once "view.php";
 require_once "controller.php";
 
+if (class_exists('PDO')) {
+    //echo "<p>PDO exists and the following PDO drivers are loaded.<pre>";
+    //print_r(PDO::getAvailableDrivers());
+}
+
+if (in_array("sqlite", PDO::getAvailableDrivers())) {
+    //echo "<p style='color:blue'>sqlite PDO driver IS enabled";
+} else {
+    echo "<p style='color:red'>sqlite PDO driver IS NOT enabled";
+}
+
 $model = new Model();
 $view = new InterfaceView();
 $controller = new Controller();
@@ -28,13 +39,12 @@ if(isset($_SESSION['page'])){
             //
             break;
         case "gameLibrary":
-            $var1 = array("name" => "hello1");
-            $var2 = array("name" => "hello2");
-            $var3 = array("name" => "hello3");
-            $var4 = array("name" => "hello1");
-
-            $arr = array($var1, $var2, $var3, $var4, $var1, $var2, $var3, $var4, $var1, $var2, $var3, $var4);
-            $view->displayGameLibrary($arr);
+            $var = $model->read("GameLibrary", null);
+            $view->displayGameLibrary($var);
+            break;
+        case "game":
+            $var = $model->read("Game", $_SESSION['game']);
+            $view->displayGame($var, "Name");
             break;
         default:
             break;

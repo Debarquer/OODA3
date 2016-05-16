@@ -5,6 +5,9 @@ class Controller{
 public function checkInput(){
     if(isset($_GET['page'])){
         $_SESSION['page'] = $_GET['page'];
+    } elseif(isset($_GET['game'])){
+        $_SESSION['page'] = "game";
+        $_SESSION['game'] = $_GET['game'];
     } else{
         $_SESSION['page'] = "HOME";
     }

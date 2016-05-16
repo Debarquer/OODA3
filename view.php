@@ -103,13 +103,10 @@ EOT;
 
                 echo "<table>";
                 for($i = 0; $i < sizeof($data); $i++){
-                    //echo "<tr>";
-                        echo "<td><img src='" . $dir . $data[$i]['name'] . "Large.png'</td>";
-                        if(($i+1) % 4 == 0){
-                            //echo "I AM THE FOURTH CELL";
-                            echo "</tr><tr>";
-                        }
-                    //echo "</tr>";
+                    echo "<td><a href='?game=" . $data[$i]['game'] . "'><img src='" . $dir . $data[$i]['game'] . "Large.png'></img></a></td>";
+                    if(($i+1) % 4 == 0){
+                        echo "</tr><tr>";
+                    }
                 }
                 echo "</tr></table>";
 
@@ -119,9 +116,13 @@ EOT;
     //displays a specific game, its metadata and related reviews
     function displayGame($data){
         echo "
-            <main>
-                Game Library
-            </main>";
+            <main>";
+                foreach($data as $arr){
+                    foreach($arr as $key => $value){
+                        echo "$key : $value <br>";
+                    }
+                }
+            echo "</main>";
     }
 
     //displays an interace for sending email
