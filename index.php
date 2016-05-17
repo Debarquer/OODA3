@@ -49,6 +49,10 @@ if(isset($_SESSION['page'])){
             $var = $model->read("Game", $_SESSION['game']);
             $view->displayGame($var, "Name");
             break;
+        case "bookings":
+            $data = $model->read("Bookings", null);
+            $view->displayBookings($data);
+        break;
         default:
             $view->displayStart();
             break;

@@ -2,7 +2,7 @@
 
 class Model{
 
-    public $types = array("games", "accounts", "review", "Game", "GameLibrary", "Booking");
+    public $types = array("games", "accounts", "review", "Game", "GameLibrary", "Booking", "Bookings");
 
     //searches for a type using data
     //for a valid type $type
@@ -124,6 +124,13 @@ class Model{
                     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     return $res;
+                case "Bookings":
+                $stmt = $db->prepare("SELECT * FROM Booking");
+                $stmt->execute();
+                $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                return $res;
+                break;
                 default:
                 break;
             }
@@ -132,20 +139,43 @@ class Model{
         }
     }
     function update($type, $data){
-        if(in_array($types, $type)){
-
+        if(in_array($type, $this->types)){
+            //echo "***VALID UPDATE TYPE $type***";
             //valid type, connecting to database
-            $conn = new mysqli("localhost", "root", "");
-            if($conn->connect_error){
-                die("Connection to database failed at create");
+            $db = new PDO("sqlite:db/db.sqlite");
+
+            try {
+                $db = new PDO("sqlite:db/db.sqlite");
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo "Failed to connect to the database using DSN:<br>$dsn<br>";
+                throw $e;
             }
 
             switch($type){
-                case game:
-                break;
+                case "Bookings":
+                    //echo "***UPDATING BOOKING***";
+                    $pk = $data['pk'];
+                    $firstname = $data['firstname'];
+                    $lastname = $data['lastname'];
+                    $email =$data['email'];
+                    $pnumber = $data['pnumber'];
+                    $game = $data['game'];
+                    $date = $data['date'];
+                    $startingTime = $data['startingTime'];
+                    $amountOfHours = $data['amountOfHours'];
+                    $mentor = $data['mentor'];
+                    $amountOfPeople = $data['amountOfPeople'];
+
+                    $stmt = $db->prepare("UPDATE Booking SET firstname = '$firstname', lastname = '$lastname', email = '$email', pnumber = '$pnumber', game = '$game', date = '$date', startingTime = '$startingTime', amountOfHours = '$startingTime', amountOfHours = '$amountOfHours', mentor = '$mentor', amountOfPeople = '$amountOfPeople' WHERE pk=$pk");
+                    //$stmt = $db->prepare("UPDATE Booking SET ('firstname' = '$firstname', 'lastname' = '$lastname', 'email' = '$email', 'pnumber' = '$pnumber', 'game' = '$game', 'date' = '$date', 'startingTime' = '$startingTime', 'amountOfHours' = '$amountOfHours', 'mentor' = '$mentor', 'amountOfPeople' = $'amountOfPeople')");
+                    $stmt->execute();
+                    //$res = $stmt->fetchAll(PDO:FETCH_ASSOC);
                 default:
                 break;
             }
+        } else{
+            echo "***INVALID TYPE***";
         }
     }
 

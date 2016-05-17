@@ -19,9 +19,18 @@ public function checkInput($model){
         "amountOfHours" => $_GET['amountOfHours'], "mentor" => $_GET['chooseMentor'], "amountOfPeople" => $_GET['numberOfPeople']);
 
         $model->create("Booking", $arr);
-    }
-        else{
+    } else{
         $_SESSION['page'] = "HOME";
+    }
+
+    if(isset($_POST['firstname']) && isset($_POST['lastname'])){
+        //echo "***RECEIVED BOOKING FOR UPDATE***";
+        //update bookings
+        $arr = array("pk" => $_POST['updateBookings'], "firstname" => $_POST['firstname'], "lastname" => $_POST['lastname'], "email" => $_POST['email'],
+        "pnumber" => $_POST['pnumber'], "game" => $_POST['game'], "date" => $_POST['date'], "startingTime" => $_POST['startingTime'],
+        "amountOfHours" => $_POST['amountOfHours'], "mentor" => $_POST['mentor'], "amountOfPeople" => $_POST['amountOfPeople']);
+
+        $model->update("Bookings", $arr);
     }
 
     if(isset($_POST['username']) && isset($_POST['password'])){

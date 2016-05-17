@@ -73,6 +73,12 @@ class InterfaceView{
                 location.href = "?page=booking";
             };
             </script>
+            <div id="bookings" class="navButton">Bookings</div>
+            <script type="text/javascript">
+            document.getElementById("bookings").onclick = function () {
+                location.href = "?page=bookings";
+            };
+            </script>
             <div id="calendar" class="navButton">Calendar</div>
             <script type="text/javascript">
             document.getElementById("calendar").onclick = function () {
@@ -103,21 +109,21 @@ EOT;
                 <legend><h1>Booking</h1></legend>
                 <br>
                 First name<font color='red'>*</font><br>
-                <input type='text' name='firstname'><br>
+                <input type='text' name='firstname' required><br>
                 <br>
                 Last name<font color='red'>*</font><br>
-                <input type='text' name='lastname'><br>
+                <input type='text' name='lastname' required><br>
                 <br>
                 E-mail<font color='red'>*</font><br>
-                <input type='text' name='email'><br>
+                <input type='text' name='email' required><br>
                 <br>
                 Phone number<font color='red'>*</font><br>
-                <input type='text' name='pnumber'><br>
+                <input type='text' name='pnumber' required><br>
                 <br>
                 Choose game<font color='red'>*</font><br>
                 <br>
 
-                <select name='chooseGame'>
+                <select name='chooseGame' required>
                 <option value='Choose game'>Choose game</option>
                 <option value='game1'>Fifa 2016</option>
                 <option value='game2'>Call of Duty</option>
@@ -128,13 +134,13 @@ EOT;
                 <br>
 
                 Date<font color='red'>*</font><br>
-                <input type='text' name='date'><br>
+                <input type='text' name='date' required><br>
                 <br>
                 Starting time<font color='red'>*</font><br>
-                <input type='text' name='startingTime'><br>
+                <input type='text' name='startingTime' required><br>
                 <br>
                 Amount of hours<font color='red'>*</font><br>
-                <input type='text' name='amountOfHours'><br>
+                <input type='text' name='amountOfHours' required><br>
                 <br>
 
                 Mentor<br>
@@ -265,9 +271,35 @@ EOT;
     function displayGameHouseInfo(){
         echo "
             <main>
-                <h1>About</h1>
+                <h2>About</h2>
                 Some text about the game house.
             </main>";
+    }
+
+    function displayBookings($data){
+        echo "<main>";
+        echo "<table class='table'><tr><td>Firstname</td><td>Lastname</td><td>Email</td><td>Phone number</td><td>Game</td><td>Date</td><td>Starting time</td><td>Duration (hours)</td><td>Booked mentor</td><td>Amount of participants</td><td>Select</td><td>Update</td></tr>";
+
+        foreach($data as $booking){
+          if(isset($_POST['selected'])) {
+            if($_POST['selected'] == $booking['pk']) {
+              echo "<form method='post' name='updateBookings'>";
+              echo "<tr><td><input type='text' name='firstname' value=" . $booking['firstname'] . "></input></td><td><input type='text' name='lastname' value=" . $booking['lastname'] . "></input></td><td><input type='text' name='email' value=" . $booking['email'] . "></input></td><td><input type='text' name='pnumber' value=" . $booking['pnumber'] . "></input></td><td><input type='text' name='game' value=" . $booking['game'] . "></input></td><td><input type='text' name='date' value=" . $booking['date'] . "></input></td><td><input type='text' name='startingTime' value=" . $booking['startingTime'] . "></input></td><td><input type='text' name='amountOfHours' value=" . $booking['amountOfHours'] . "></input></td><td><input type='text' name='mentor' value=" . $booking['mentor'] . "></input></td><td><input type='text' name='amountOfPeople' value=" . $booking['amountOfPeople'] . "></input></td>";
+              echo "<td></td>";
+              echo "<td><button type='submit' value=" . $booking['pk'] . " name='updateBookings'>update</button></td></tr>";
+              echo "</form>";
+            } else {
+              echo "<tr><td>" . $booking['firstname'] . "</td><td>" . $booking['lastname'] . "</td><td>" . $booking['email'] . "</td><td>" . $booking['pnumber'] . "</td><td>" . $booking['game'] . "</td><td>" . $booking['date'] . "</td><td>" . $booking['startingTime'] . "</td><td>" . $booking['amountOfHours'] . "</td><td>" . $booking['mentor'] . "</td><td>" . $booking['amountOfPeople'] . "</td>";
+              echo "<td><form method='post'><button type='submit' value=" . $booking['pk'] . " name='selected'>select</button></form></td>";
+              echo "<td></td></tr>";
+            }
+          } else {
+            echo "<tr><td>" . $booking['firstname'] . "</td><td>" . $booking['lastname'] . "</td><td>" . $booking['email'] . "</td><td>" . $booking['pnumber'] . "</td><td>" . $booking['game'] . "</td><td>" . $booking['date'] . "</td><td>" . $booking['startingTime'] . "</td><td>" . $booking['amountOfHours'] . "</td><td>" . $booking['mentor'] . "</td><td>" . $booking['amountOfPeople'] . "</td>";
+            echo "<td><form method='post'><button type='submit' value=" . $booking['pk'] . " name='selected'>select</button></form></td>";
+            echo "<td></td></tr>";
+          }
+        }
+        echo "</main>";
     }
 }
  ?>
