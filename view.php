@@ -151,6 +151,8 @@ EOT;
                 <option value='mentor1'>Charlie Sheen</option>
                 <option value='mentor2'>Brad Pitt</option>
                 <option value='mentor3'>Michael Jordan</option>
+                <option value='mentor4'>Tarik 'Kungsmarken' Boi</option>
+                <option value='mentor5'>None</option>
                 </select>
                 <br>
                 <br>
@@ -168,7 +170,7 @@ EOT;
                 <br>
                 <br>
                 <br>
-                <input type='submit' value='Payment'>
+                <form method='GET'><button type='submit' name='page' value='payment'>Payment</button></form>
                 </fieldset>
                 </form>
             </main>";
@@ -241,7 +243,61 @@ EOT;
     function displayStart(){
         echo "
             <main>
-                Home page
+                <h1> Welcome to LE AWESOME GAME HOUSE! </h1>
+                <br>
+
+                <h3> Tariks Quote of the day </h3> <br>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
+                Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
+                Aliquam ut convallis nulla, eu congue lectus. <br> Ut sit amet augue a nisl facilisis vulputate. Phasellus non sem urna. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                <br>
+                <br>
+                Nunc consectetur non elit at mattis. Ut fermentum pretium sodales. Aliquam malesuada velit in mi porttitor, in rhoncus libero tristique. <br>
+                Phasellus volutpat arcu at arcu tincidunt mollis. Phasellus at iaculis leo. Vivamus porttitor sem et feugiat mollis. Praesent in sodales massa. <br>
+                Nam fermentum tempus posuere. Donec in ullamcorper justo. Nulla eu risus nisi. Maecenas aliquet ipsum ipsum, eget vulputate sapien efficitur ultrices.
+                <br>
+                <br>
+                Ut vehicula, nibh ut eleifend auctor, lacus quam tempor erat, at eleifend eros tellus sit amet eros. Vivamus sed velit feugiat, posuere nisl non, ultrices libero.
+                <br> Donec ultrices ipsum et turpis elementum rhoncus interdum id neque. In rhoncus porta dapibus. Nullam in efficitur justo.
+                <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras dolor turpis, mollis ut maximus placerat, ornare id nunc.
+                <br> Proin dapibus diam id risus interdum facilisis. Phasellus a fermentum augue.
+                <br>
+                <br>
+                Ut vehicula, nibh ut eleifend auctor, lacus quam tempor erat, at eleifend eros tellus sit amet eros. Vivamus sed velit feugiat, posuere nisl non, ultrices libero.
+                <br> Donec ultrices ipsum et turpis elementum rhoncus interdum id neque. In rhoncus porta dapibus. Nullam in efficitur justo.
+                <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras dolor turpis, mollis ut maximus placerat, ornare id nunc.
+                <br> Proin dapibus diam id risus interdum facilisis. Phasellus a fermentum augue.
+                <br>
+                <br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
+                Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
+                Aliquam ut convallis nulla, eu congue lectus. <br> Ut sit amet augue a nisl facilisis vulputate. Phasellus non sem urna. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                <br>
+                <br>
+                Nunc consectetur non elit at mattis. Ut fermentum pretium sodales. Aliquam malesuada velit in mi porttitor, in rhoncus libero tristique. <br>
+                Phasellus volutpat arcu at arcu tincidunt mollis. Phasellus at iaculis leo. Vivamus porttitor sem et feugiat mollis. Praesent in sodales massa. <br>
+                Nam fermentum tempus posuere. Donec in ullamcorper justo. Nulla eu risus nisi. Maecenas aliquet ipsum ipsum, eget vulputate sapien efficitur ultrices.
+                <br>
+                <br>
+                Nunc consectetur non elit at mattis. Ut fermentum pretium sodales. Aliquam malesuada velit in mi porttitor, in rhoncus libero tristique. <br>
+                Phasellus volutpat arcu at arcu tincidunt mollis. Phasellus at iaculis leo. Vivamus porttitor sem et feugiat mollis. Praesent in sodales massa. <br>
+                Nam fermentum tempus posuere. Donec in ullamcorper justo. Nulla eu risus nisi. Maecenas aliquet ipsum ipsum, eget vulputate sapien efficitur ultrices.
+                <br>
+                <br>
+                <h3> Newly acquired mentor, Tarik Boi </h3>
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
+                Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
+                Aliquam ut convallis nulla, eu congue lectus. <br> Ut sit amet augue a nisl facilisis vulputate. Phasellus non sem urna. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                <br>
+                <br>
+                Nunc consectetur non elit at mattis. Ut fermentum pretium sodales. Aliquam malesuada velit in mi porttitor, in rhoncus libero tristique. <br>
+                Phasellus volutpat arcu at arcu tincidunt mollis. Phasellus at iaculis leo. Vivamus porttitor sem et feugiat mollis. Praesent in sodales massa. <br>
+                Nam fermentum tempus posuere. Donec in ullamcorper justo. Nulla eu risus nisi. Maecenas aliquet ipsum ipsum, eget vulputate sapien efficitur ultrices.
+                <br>
+                <br>
+
             </main>";
     }
 
@@ -271,8 +327,38 @@ EOT;
     function displayGameHouseInfo(){
         echo "
             <main>
+
                 <h2>About</h2>
                 Some text about the game house.
+
+                <h1>About</h1>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
+                Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
+                Aliquam ut convallis nulla, eu congue lectus. <br> Ut sit amet augue a nisl facilisis vulputate. Phasellus non sem urna. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                <br>
+                <br>
+                Nunc consectetur non elit at mattis. Ut fermentum pretium sodales. Aliquam malesuada velit in mi porttitor, in rhoncus libero tristique. <br>
+                Phasellus volutpat arcu at arcu tincidunt mollis. Phasellus at iaculis leo. Vivamus porttitor sem et feugiat mollis. Praesent in sodales massa. <br>
+                Nam fermentum tempus posuere. Donec in ullamcorper justo. Nulla eu risus nisi. Maecenas aliquet ipsum ipsum, eget vulputate sapien efficitur ultrices.
+                <br>
+                <br>
+                Ut vehicula, nibh ut eleifend auctor, lacus quam tempor erat, at eleifend eros tellus sit amet eros. Vivamus sed velit feugiat, posuere nisl non, ultrices libero.
+                <br> Donec ultrices ipsum et turpis elementum rhoncus interdum id neque. In rhoncus porta dapibus. Nullam in efficitur justo.
+                <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras dolor turpis, mollis ut maximus placerat, ornare id nunc.
+                <br> Proin dapibus diam id risus interdum facilisis. Phasellus a fermentum augue.
+                <br>
+                <br>
+                Ut vehicula, nibh ut eleifend auctor, lacus quam tempor erat, at eleifend eros tellus sit amet eros. Vivamus sed velit feugiat, posuere nisl non, ultrices libero.
+                <br> Donec ultrices ipsum et turpis elementum rhoncus interdum id neque. In rhoncus porta dapibus. Nullam in efficitur justo.
+                <br> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras dolor turpis, mollis ut maximus placerat, ornare id nunc.
+                <br> Proin dapibus diam id risus interdum facilisis. Phasellus a fermentum augue.
+                <br>
+                <br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
+                Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
+                Aliquam ut convallis nulla, eu congue lectus. <br> Ut sit amet augue a nisl facilisis vulputate. Phasellus non sem urna. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                <br>
+                <br>
             </main>";
     }
 

@@ -52,6 +52,10 @@ public function checkInput($model){
     } elseif (isset($_POST['logout'])) {
         $_SESSION['username'] = "";
     }
+    elseif (isset($_POST['payment'])) {
+      $view->displayStart();
+    }
+
 }
 
 function login(){
