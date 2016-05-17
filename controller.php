@@ -9,7 +9,7 @@ public function checkInput($model){
         $_SESSION['page'] = "game";
         $_SESSION['game'] = $_GET['game'];
     } elseif(isset($_GET['firstname']) && isset($_GET['lastname'])){
-        //echo "***RECEIVED BOOKING***";
+        echo "***RECEIVED BOOKING***";
         //validate the data in the header
         //to be implemented
 
