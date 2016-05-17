@@ -79,6 +79,13 @@ class InterfaceView{
                 location.href = "?page=calendar";
             };
             </script>
+            <div id="about" class="navButton">About</div>
+            <script type="text/javascript">
+            document.getElementById("about").onclick = function () {
+                location.href = "?page=about";
+            };
+            </script>
+
 EOT;
                 echo "</nav>";
 
@@ -89,19 +96,83 @@ EOT;
     function displayBooking(){
         echo "
             <main>
-                Booking
+                <form action='action_page.php'>
+                <fieldset>
+                <legend><h1>Booking</h1></legend>
+                <br>
+                First name<font color='red'>*</font><br>
+                <input type='text' name='firstname'><br>
+                <br>
+                Last name<font color='red'>*</font><br>
+                <input type='text' name='lastname'><br>
+                <br>
+                E-mail<font color='red'>*</font><br>
+                <input type='text' name='E-mail'><br>
+                <br>
+                Phone number<font color='red'>*</font><br>
+                <input type='text' name='Phone number'><br>
+                <br>
+                Choose game<font color='red'>*</font><br>
+                <br>
+
+                <select>
+                <option value='Choose game'>Choose game</option>
+                <option value='game1'>Fifa 2016</option>
+                <option value='game2'>Call of Duty</option>
+                <option value='game3'>Battlefield</option>
+                <option value='game4'>NihilUmbra</option>
+                </select>
+                <br>
+                <br>
+
+                Date<font color='red'>*</font><br>
+                <input type='text' name='Date'><br>
+                <br>
+                Starting time<font color='red'>*</font><br>
+                <input type='text' name='Starting Time'><br>
+                <br>
+                Amount of hours<font color='red'>*</font><br>
+                <input type='text' name='Amount of Hours'><br>
+                <br>
+
+                Mentor<br>
+                <br>
+
+                <select>
+                <option value='mentor'>Choose mentor</option>
+                <option value='mentor1'>Charlie Sheen</option>
+                <option value='mentor2'>Brad Pitt</option>
+                <option value='mentor3'>Michael Jordan</option>
+                </select>
+                <br>
+                <br>
+
+                Booking for<br>
+                <br>
+
+                <select>
+                <option value='persons'>1</option>
+                <option value='person1'>2</option>
+                <option value='person2'>3</option>
+                <option value='person3'>4</option>
+                </select>
+                <br>
+                <br>
+                <br>
+                <br>
+                <input type='submit' value='Payment'>
+                </fieldset>
+                </form>
             </main>";
     }
 
     //displays the game library as a collection of images
     function displayGameLibrary($data){
         $dir = "resources/games/";
-
-        echo "
-            <main>
-                Game Library<br>";
-
-                echo "<table>";
+          echo "<table>
+                Game Library<br>
+                <input type='text' name='search'>
+                <input type='submit' value='Search'>";
                 for($i = 0; $i < sizeof($data); $i++){
                     echo "<td><a href='?game=" . $data[$i]['game'] . "'><img src='" . $dir . $data[$i]['game'] . "Large.png'></img></a></td>";
                     if(($i+1) % 4 == 0){
@@ -110,7 +181,6 @@ EOT;
                 }
                 echo "</tr></table>";
 
-            echo "</main>";
     }
 
     //displays a specific game, its metadata and related reviews
@@ -173,10 +243,10 @@ EOT;
     }
 
 
-    function displayCalendar($data){
+    function displayCalendar(){
         echo "
             <main>
-                Game Library
+              Calendar
             </main>";
     }
 
@@ -187,10 +257,11 @@ EOT;
             </main>";
     }
 
-    function displayGameHouseInfo($data){
+    function displayGameHouseInfo(){
         echo "
             <main>
-                Game Library
+                <h1>About</h1>
+                Some text about the game house.
             </main>";
     }
 }

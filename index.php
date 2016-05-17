@@ -38,6 +38,9 @@ if(isset($_SESSION['page'])){
         case "register":
             //
             break;
+        case "about":
+            $view->displayGameHouseInfo();
+            break;
         case "gameLibrary":
             $var = $model->read("GameLibrary", null);
             $view->displayGameLibrary($var);
