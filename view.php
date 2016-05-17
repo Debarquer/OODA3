@@ -96,7 +96,9 @@ EOT;
     function displayBooking(){
         echo "
             <main>
-                <form action='action_page.php'>
+                ";//<form action='action_page.php'>
+                echo
+                "<form method=get>
                 <fieldset>
                 <legend><h1>Booking</h1></legend>
                 <br>
@@ -107,15 +109,15 @@ EOT;
                 <input type='text' name='lastname'><br>
                 <br>
                 E-mail<font color='red'>*</font><br>
-                <input type='text' name='E-mail'><br>
+                <input type='text' name='email'><br>
                 <br>
                 Phone number<font color='red'>*</font><br>
-                <input type='text' name='Phone number'><br>
+                <input type='text' name='pnumber'><br>
                 <br>
                 Choose game<font color='red'>*</font><br>
                 <br>
 
-                <select>
+                <select name='chooseGame'>
                 <option value='Choose game'>Choose game</option>
                 <option value='game1'>Fifa 2016</option>
                 <option value='game2'>Call of Duty</option>
@@ -126,19 +128,19 @@ EOT;
                 <br>
 
                 Date<font color='red'>*</font><br>
-                <input type='text' name='Date'><br>
+                <input type='text' name='date'><br>
                 <br>
                 Starting time<font color='red'>*</font><br>
-                <input type='text' name='Starting Time'><br>
+                <input type='text' name='startingTime'><br>
                 <br>
                 Amount of hours<font color='red'>*</font><br>
-                <input type='text' name='Amount of Hours'><br>
+                <input type='text' name='amountOfHours'><br>
                 <br>
 
                 Mentor<br>
                 <br>
 
-                <select>
+                <select name='chooseMentor'>
                 <option value='mentor'>Choose mentor</option>
                 <option value='mentor1'>Charlie Sheen</option>
                 <option value='mentor2'>Brad Pitt</option>
@@ -150,7 +152,7 @@ EOT;
                 Booking for<br>
                 <br>
 
-                <select>
+                <select name='numberOfPeople'>
                 <option value='persons'>1</option>
                 <option value='person1'>2</option>
                 <option value='person2'>3</option>
@@ -169,9 +171,11 @@ EOT;
     //displays the game library as a collection of images
     function displayGameLibrary($data){
         $dir = "resources/games/";
+
+        echo "<div id='gameLibrary'>";
+
           echo "<table>
-                Game Library<br>
-                <input type='text' name='search'>
+                <input class='glButton' type='text' name='search'>
                 <input type='submit' value='Search'>";
                 for($i = 0; $i < sizeof($data); $i++){
                     echo "<td><a href='?game=" . $data[$i]['game'] . "'><img src='" . $dir . $data[$i]['game'] . "Large.png'></img></a></td>";
@@ -180,6 +184,7 @@ EOT;
                     }
                 }
                 echo "</tr></table>";
+        echo "</div>";
 
     }
 

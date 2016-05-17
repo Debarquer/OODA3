@@ -2,7 +2,7 @@
 
 class Model{
 
-    public $types = array("games", "accounts", "review", "Game", "GameLibrary");
+    public $types = array("games", "accounts", "review", "Game", "GameLibrary", "Booking");
 
     //searches for a type using data
     //for a valid type $type
@@ -48,26 +48,51 @@ class Model{
     }
 
     function create($type, $data){
-        if(in_array($types, $type)){
+        if(in_array($type, $this->types)){
             //valid type, connecting to database
+            //echo "***VALID TYPE $type***";
 
-            $conn = new mysqli("localhost", "root", "");
-            if($conn->connect_error){
-                die("Connection to database failed at create");
+            //valid type, connecting to database
+            $db = new PDO("sqlite:db/db.sqlite");
+
+            try {
+                $db = new PDO("sqlite:db/db.sqlite");
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo "Failed to connect to the database using DSN:<br>$dsn<br>";
+                throw $e;
             }
 
             switch($type){
-                case game:
+                case "Game":
                     //searching for a game
 
                     //'preparing' statement
-                    $sql = "INSERT INTO $type VALUES ('username', 'displayname', 'password', 'email', 'date', 'type')
-                    ('$data[username]', '$data[displayname]', '$data[password]', '$data[email]', '$data[date]', '$data[type]')";
+                    $sql = "INSERT INTO $type ('username', 'displayname', 'password', 'email', 'date', 'type') VALUES ('$data[username]', '$data[displayname]', '$data[password]', '$data[email]', '$data[date]', '$data[type]')";
 
+                break;
+                case "Booking":
+                    //echo "***ADDING BOOKING***";
+                    $firstname = $data['firstname'];
+                    $lastname = $data['lastname'];
+                    $email =$data['email'];
+                    $pnumber = $data['pnumber'];
+                    $game = $data['game'];
+                    $date = $data['date'];
+                    $startingTime = $data['startingTime'];
+                    $amountOfHours = $data['amountOfHours'];
+                    $mentor = $data['mentor'];
+                    $amountOfPeople = $data['amountOfPeople'];
+
+                    $stmt = $db->prepare("INSERT INTO Booking ('firstname', 'lastname', 'email', 'pnumber', 'game', 'date', 'startingTime', 'amountOfHours', 'mentor', 'amountOfPeople') VALUES ('$firstname', '$lastname', '$email', '$pnumber', '$game', '$date', '$startingTime', '$amountOfHours', '$mentor', '$amountOfPeople')");
+                    $stmt->execute();
+                    //$res = $stmt->fetchAll(PDO:FETCH_ASSOC);
                 break;
                 default:
                 break;
             }
+        } else{
+            echo "***INVALID TYPE $type***";
         }
     }
 
@@ -87,7 +112,6 @@ class Model{
 
             switch($type){
                 case "Game":
-
                     $stmt = $db->prepare("SELECT * FROM Game WHERE pk=$id");
                     $stmt->execute();
                     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);

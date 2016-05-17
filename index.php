@@ -21,7 +21,7 @@ $model = new Model();
 $view = new InterfaceView();
 $controller = new Controller();
 
-$controller->checkInput();
+$controller->checkInput($model);
 
 $view->staticStuff();
 if(isset($_SESSION['page'])){
@@ -50,6 +50,7 @@ if(isset($_SESSION['page'])){
             $view->displayGame($var, "Name");
             break;
         default:
+            $view->displayStart();
             break;
     }
 } else{

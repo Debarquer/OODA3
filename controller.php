@@ -2,13 +2,25 @@
 
 class Controller{
 
-public function checkInput(){
+public function checkInput($model){
     if(isset($_GET['page'])){
         $_SESSION['page'] = $_GET['page'];
     } elseif(isset($_GET['game'])){
         $_SESSION['page'] = "game";
         $_SESSION['game'] = $_GET['game'];
-    } else{
+    } elseif(isset($_GET['firstname']) && isset($_GET['lastname'])){
+        //echo "***RECEIVED BOOKING***";
+        //validate the data in the header
+        //to be implemented
+
+        //process the data in the header
+        $arr = array("firstname" => $_GET['firstname'], "lastname" => $_GET['lastname'], "email" => $_GET['email'],
+        "pnumber" => $_GET['pnumber'], "game" => $_GET['chooseGame'], "date" => $_GET['date'], "startingTime" => $_GET['startingTime'],
+        "amountOfHours" => $_GET['amountOfHours'], "mentor" => $_GET['chooseMentor'], "amountOfPeople" => $_GET['numberOfPeople']);
+
+        $model->create("Booking", $arr);
+    }
+        else{
         $_SESSION['page'] = "HOME";
     }
 
