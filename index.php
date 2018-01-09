@@ -46,10 +46,12 @@ if(isset($_SESSION['page'])){
         case "gameLibrary":
             if(isset($_POST['search'])){
                 $var = $model->search("Game", $_POST['search']);
+                $view->displayGameLibrary($var, true);
             } else{
                 $var = $model->read("GameLibrary", null);
+                $view->displayGameLibrary($var, false);
             }
-            $view->displayGameLibrary($var);
+
             break;
         case "game":
             $var = $model->read("Game", $_SESSION['game']);

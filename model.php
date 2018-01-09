@@ -24,7 +24,7 @@ class Model{
             switch($type){
                 case "Game":
                     //searching for a game
-                    $stmt = $db->prepare("SELECT * FROM Game WHERE name LIKE '%field%'");
+                    $stmt = $db->prepare("SELECT * FROM Game WHERE name LIKE '%$data%'");
                     $stmt->execute();
                     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

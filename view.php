@@ -179,25 +179,31 @@ EOT;
     }
 
     //displays the game library as a collection of images
-    function displayGameLibrary($data){
+    function displayGameLibrary($data, $searched){
         $dir = "resources/games/";
 
         echo "<div id='gameLibrary'>";
 
-          echo "<table>
-                <form method='post'>
-                    <input class='glButton' type='text' name='search'>
-                    <input type='submit' value='search'>
-                </form>";
-                for($i = 0; $i < sizeof($data); $i++){
-                    echo "<td><a href='?game=" . $data[$i]['game'] . "'><img src='" . $dir . $data[$i]['game'] . "Large.png'></img></a></td>";
-                    if(($i+1) % 4 == 0){
-                        echo "</tr><tr>";
-                    }
-                }
-                echo "</tr></table>";
-        echo "</div>";
+        echo "
+            <form method='post'>
+                <input class='glButton' type='text' name='search'>
+                <input type='submit' value='search'>
+            </form>
+            <table><tr>";
 
+            for($i = 0; $i < sizeof($data); $i++){
+                if(!$searched){
+                    echo "<td><a href='?game=" . $data[$i]['game'] . "'><img src='" . $dir . $data[$i]['game'] . "Large.png'></img></a></td>";
+                }
+                else{
+                    echo "<td><a href='?game=" . $data[$i]['pk'] . "'><img src='" . $dir . $data[$i]['pk'] . "Large.png'></img></a></td>";
+                }
+                if(($i+1) % 3 == 0){
+                    echo "</tr><tr>";
+                }
+            }
+            echo "</tr></table>";
+        echo "</div>";
     }
 
     //displays a specific game, its metadata and related reviews
@@ -247,10 +253,10 @@ EOT;
     function displayStart(){
         echo "
             <main>
-                <h1> Welcome to LE AWESOME GAME HOUSE! </h1>
+                <h1> Welcome to the AWESOME GAME HOUSE! </h1>
                 <br>
 
-                <h3> Tariks Quote of the day </h3> <br>
+                <h3> Quote of the day </h3> <br>
 
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
                 Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
@@ -289,7 +295,6 @@ EOT;
                 Nam fermentum tempus posuere. Donec in ullamcorper justo. Nulla eu risus nisi. Maecenas aliquet ipsum ipsum, eget vulputate sapien efficitur ultrices.
                 <br>
                 <br>
-                <h3> Newly acquired mentor, Tarik Boi </h3>
 
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
                 Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
