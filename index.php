@@ -30,19 +30,25 @@ if(isset($_SESSION['page'])){
             $view->displayStart();
             break;
         case "booking":
-            $view->displayBooking();
+            $arr = $model->read("AllGames", null);
+            //print_r($arr);
+            $view->displayBooking($arr);
             break;
         case "calendar":
             $view->displayCalendar();
             break;
         case "register":
-            //
+            $view->displayRegister();
             break;
         case "about":
             $view->displayGameHouseInfo();
             break;
         case "gameLibrary":
-            $var = $model->read("GameLibrary", null);
+            if(isset($_POST['search'])){
+                $var = $model->search("Game", $_POST['search']);
+            } else{
+                $var = $model->read("GameLibrary", null);
+            }
             $view->displayGameLibrary($var);
             break;
         case "game":

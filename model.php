@@ -2,44 +2,33 @@
 
 class Model{
 
-    public $types = array("games", "accounts", "review", "Game", "GameLibrary", "Booking", "Bookings");
+    public $types = array("GameLibrarySearch", "games", "accounts", "review", "Game", "GameLibrary", "Booking", "Bookings", "registerAccount", "deleteBookings", "AllGames");
 
     //searches for a type using data
     //for a valid type $type
     function search($type, $data){
 
-        if(in_array($types, $type)){
+        if(in_array($type, $this->types)){
 
             //valid type, connecting to database
-            $conn = new mysqli("localhost", "root", "");
-            if($conn->connect_error){
-                die("Connection to database failed at create");
+            $db = new PDO("sqlite:db/db.sqlite");
+
+            try {
+                $db = new PDO("sqlite:db/db.sqlite");
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo "Failed to connect to the database using DSN:<br>$dsn<br>";
+                throw $e;
             }
 
             switch($type){
-                case game:
+                case "Game":
                     //searching for a game
+                    $stmt = $db->prepare("SELECT * FROM Game WHERE name LIKE '%field%'");
+                    $stmt->execute();
+                    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    //'preparing' statement
-
-                    $sql = "SELECT * FROM games LIKE true=true";
-
-                    foreach($data as $key -> $value){
-                        switch($key){
-                            case title:
-                                $sql = " || title=%$value%";
-                            break;
-                            case descrition:
-                                $sql = " || description=%$value%";
-                            break;
-                            case category:
-                                $sql = " || category=%$value%";
-                            break;
-                            case ageLimit:
-                            $sql = " || ageLimit=%$value%";
-                            break;
-                        }
-                    }
+                    return $res;
                 break;
                 default:
                 break;
@@ -88,6 +77,10 @@ class Model{
                     $stmt->execute();
                     //$res = $stmt->fetchAll(PDO:FETCH_ASSOC);
                 break;
+                case "registerAccount":
+                $stmt = $db->prepare("INSERT INTO Account ('fullName', 'displayName', 'password', 'email', 'phoneNumber', 'dateOfBirth', 'address', 'username') VALUES ('$data[firstname]', '$data[displayname]', '$data[password]', '$data[email]', '$data[pnumber]', '$data[dateofbirth]', '$data[address]', '$data[username]')");
+                $stmt->execute();
+                break;
                 default:
                 break;
             }
@@ -113,6 +106,13 @@ class Model{
             switch($type){
                 case "Game":
                     $stmt = $db->prepare("SELECT * FROM Game WHERE pk=$id");
+                    $stmt->execute();
+                    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    return $res;
+                break;
+                case "AllGames":
+                    $stmt = $db->prepare("SELECT * FROM Game");
                     $stmt->execute();
                     $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -180,16 +180,23 @@ class Model{
     }
 
     function delete($type, $id){
-        if(in_array($types, $type)){
+        if(in_array($type, $this->types)){
 
             //valid type, connecting to database
-            $conn = new mysqli("localhost", "root", "");
-            if($conn->connect_error){
-                die("Connection to database failed at create");
+            $db = new PDO("sqlite:db/db.sqlite");
+
+            try {
+                $db = new PDO("sqlite:db/db.sqlite");
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo "Failed to connect to the database using DSN:<br>$dsn<br>";
+                throw $e;
             }
 
             switch($type){
-                case game:
+                case "deleteBookings":
+                    $stmt = $db->prepare("DELETE FROM Booking WHERE pk = '$id'");
+                    $stmt->execute();
                 break;
                 default:
                 break;

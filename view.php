@@ -99,7 +99,7 @@ EOT;
     }
 
     //displays booking form etc
-    function displayBooking(){
+    function displayBooking($data){
         echo "
             <main>
                 ";//<form action='action_page.php'>
@@ -121,15 +121,17 @@ EOT;
                 <input type='text' name='pnumber' required><br>
                 <br>
                 Choose game<font color='red'>*</font><br>
-                <br>
+                <br>";
 
-                <select name='chooseGame' required>
-                <option value='Choose game'>Choose game</option>
-                <option value='game1'>Fifa 2016</option>
-                <option value='game2'>Call of Duty</option>
-                <option value='game3'>Battlefield</option>
-                <option value='game4'>NihilUmbra</option>
-                </select>
+                echo "<select name='chooseGame' required>";
+                echo "<option value='Choose game'>Choose game</option>";
+                //$games = $data;
+                foreach($data as $game){
+                    echo "<option value=" . $game['pk'] . ">" . $game['name'] . "</option>";
+                }
+                echo "</select>";
+
+                echo "
                 <br>
                 <br>
 
@@ -161,16 +163,16 @@ EOT;
                 <br>
 
                 <select name='numberOfPeople'>
-                <option value='persons'>1</option>
-                <option value='person1'>2</option>
-                <option value='person2'>3</option>
-                <option value='person3'>4</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
                 </select>
                 <br>
                 <br>
                 <br>
                 <br>
-                <form method='GET'><button type='submit' name='page' value='payment'>Payment</button></form>
+                <form method='GET'><button type='submit' name='pages' value='payment'>Payment</button></form>
                 </fieldset>
                 </form>
             </main>";
@@ -183,8 +185,10 @@ EOT;
         echo "<div id='gameLibrary'>";
 
           echo "<table>
-                <input class='glButton' type='text' name='search'>
-                <input type='submit' value='Search'>";
+                <form method='post'>
+                    <input class='glButton' type='text' name='search'>
+                    <input type='submit' value='search'>
+                </form>";
                 for($i = 0; $i < sizeof($data); $i++){
                     echo "<td><a href='?game=" . $data[$i]['game'] . "'><img src='" . $dir . $data[$i]['game'] . "Large.png'></img></a></td>";
                     if(($i+1) % 4 == 0){
@@ -313,7 +317,66 @@ EOT;
     function displayCalendar(){
         echo "
             <main>
-              Calendar
+            <div class='month'>
+            <ul>
+              <li class='prev'>&#10094;</li>
+              <li class='next'>&#10095;</li>
+              <li style='text-align:center'>
+                May<br>
+                <span style='font-size:18px'>2016</span>
+              </li>
+            </ul>
+            </div>
+
+            <ul class='weekdays'>
+            <li>Mo</li>
+            <li>Tu</li>
+            <li>We</li>
+            <li>Th</li>
+            <li>Fr</li>
+            <li>Sa</li>
+            <li>Su</li>
+            </ul>
+
+            <ul class='days'>
+            <li><span class='inactive'>25</span></li>
+            <li><span class='inactive'>26</span></li>
+            <li><span class='inactive'>27</span></li>
+            <li><span class='inactive'>28</span></li>
+            <li><span class='inactive'>29</span></li>
+            <li><span class='inactive'>30</span></li>
+            <li><span class='holiday'>1</span></li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li><span class='holiday'>8</span></li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li><span class='holiday'>15</span></li>
+            <li>16</li>
+            <li>17</li>
+            <li><span class='active'>18</span></li>
+            <li>19</li>
+            <li>20</li>
+            <li>21</li>
+            <li><span class='holiday'>22</span></li>
+            <li>23</li>
+            <li>24</li>
+            <li>25</li>
+            <li>26</li>
+            <li>27</li>
+            <li>28</li>
+            <li><span class='holiday'>29</span></li>
+            <li>30</li>
+            <li>31</li>
+            </ul>
             </main>";
     }
 
@@ -327,10 +390,6 @@ EOT;
     function displayGameHouseInfo(){
         echo "
             <main>
-
-                <h2>About</h2>
-                Some text about the game house.
-
                 <h1>About</h1>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vulputate massa commodo ex finibus, non interdum ligula efficitur. <br> Vestibulum vel ipsum mauris.
                 Fusce sed tempor sapien, ac molestie risus. Etiam iaculis augue sed lobortis semper. <br> Proin imperdiet libero non odio laoreet lobortis.
@@ -364,7 +423,7 @@ EOT;
 
     function displayBookings($data){
         echo "<main>";
-        echo "<table class='table'><tr><td>Firstname</td><td>Lastname</td><td>Email</td><td>Phone number</td><td>Game</td><td>Date</td><td>Starting time</td><td>Duration (hours)</td><td>Booked mentor</td><td>Amount of participants</td><td>Select</td><td>Update</td></tr>";
+        echo "<table class='table'><tr><td>Firstname</td><td>Lastname</td><td>Email</td><td>Phone number</td><td>Game</td><td>Date</td><td>Starting time</td><td>Duration (hours)</td><td>Booked mentor</td><td>Amount of participants</td><td>Select</td><td>Update</td><td>Delete</td></tr>";
 
         foreach($data as $booking){
           if(isset($_POST['selected'])) {
@@ -372,19 +431,44 @@ EOT;
               echo "<form method='post' name='updateBookings'>";
               echo "<tr><td><input type='text' name='firstname' value=" . $booking['firstname'] . "></input></td><td><input type='text' name='lastname' value=" . $booking['lastname'] . "></input></td><td><input type='text' name='email' value=" . $booking['email'] . "></input></td><td><input type='text' name='pnumber' value=" . $booking['pnumber'] . "></input></td><td><input type='text' name='game' value=" . $booking['game'] . "></input></td><td><input type='text' name='date' value=" . $booking['date'] . "></input></td><td><input type='text' name='startingTime' value=" . $booking['startingTime'] . "></input></td><td><input type='text' name='amountOfHours' value=" . $booking['amountOfHours'] . "></input></td><td><input type='text' name='mentor' value=" . $booking['mentor'] . "></input></td><td><input type='text' name='amountOfPeople' value=" . $booking['amountOfPeople'] . "></input></td>";
               echo "<td></td>";
-              echo "<td><button type='submit' value=" . $booking['pk'] . " name='updateBookings'>update</button></td></tr>";
+              echo "<td><button type='submit' value=" . $booking['pk'] . " name='updateBookings'>update</button></td>";
+              echo "<td><form method='post'><button type='submit' value=" . $booking['pk'] . " name='deleteBookings'>delete</button></form></td></tr>";
               echo "</form>";
             } else {
               echo "<tr><td>" . $booking['firstname'] . "</td><td>" . $booking['lastname'] . "</td><td>" . $booking['email'] . "</td><td>" . $booking['pnumber'] . "</td><td>" . $booking['game'] . "</td><td>" . $booking['date'] . "</td><td>" . $booking['startingTime'] . "</td><td>" . $booking['amountOfHours'] . "</td><td>" . $booking['mentor'] . "</td><td>" . $booking['amountOfPeople'] . "</td>";
               echo "<td><form method='post'><button type='submit' value=" . $booking['pk'] . " name='selected'>select</button></form></td>";
-              echo "<td></td></tr>";
+              echo "<td></td>";
+              echo "<td><form method='post'><button type='submit' value=" . $booking['pk'] . " name='deleteBookings'>delete</button></form></td></tr>";
+              echo "</tr>";
             }
-          } else {
+        } else{
             echo "<tr><td>" . $booking['firstname'] . "</td><td>" . $booking['lastname'] . "</td><td>" . $booking['email'] . "</td><td>" . $booking['pnumber'] . "</td><td>" . $booking['game'] . "</td><td>" . $booking['date'] . "</td><td>" . $booking['startingTime'] . "</td><td>" . $booking['amountOfHours'] . "</td><td>" . $booking['mentor'] . "</td><td>" . $booking['amountOfPeople'] . "</td>";
             echo "<td><form method='post'><button type='submit' value=" . $booking['pk'] . " name='selected'>select</button></form></td>";
-            echo "<td></td></tr>";
-          }
+            echo "<td></td>";
+            echo "<td><form method='post'><button type='submit' value=" . $booking['pk'] . " name='deleteBookings'>delete</button></form></td></tr>";
+            echo "</tr>";
         }
+        }
+        echo "</main>";
+    }
+
+    function displayRegister(){
+        echo "<main>";
+            echo "<form method='POST'>";
+                echo "<fieldset>";
+                    echo "<legend>Register account</legend>";
+                    echo "First name<br><input type='text' name='firstname'></input><br>";
+                    echo "Last name<br><input type='text' name='lastname'></input><br>";
+                    echo "Username<br><input type='text' name='username'></input><br>";
+                    echo "Displayname<br><input type='text' name='displayname'></input><br>";
+                    echo "Password<br><input type='password' name='password'></input><br>";
+                    echo "Email<br><input type='email' name='email'></input><br>";
+                    echo "Phone number<br><input type='text' name='pnumber'></input><br>";
+                    echo "Date of birth<br><input type='text' name='dateofbirth'></input><br>";
+                    echo "Address<br><input type='text' name='address'></input><br>";
+                    echo "<button type='submit' name='register'>Register</button>";
+                echo "</fieldset>";
+            echo "</form>";
         echo "</main>";
     }
 }
